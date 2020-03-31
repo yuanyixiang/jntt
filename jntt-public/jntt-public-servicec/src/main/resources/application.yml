@@ -1,0 +1,35 @@
+server:
+  port: 8099
+spring:
+  application:
+    name: public-service
+  datasource:
+#    url: jdbc:mysql://localhost:3306/jntt
+    url: jdbc:mysql://39.107.56.242:3306/jntt
+    username: root
+    password: 123456
+  data:
+    elasticsearch:
+      cluster-name:  docker-cluster
+      cluster-nodes: 39.107.56.242:9300
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+
+mybatis:
+  type-aliases-package: com.jntt.pu.pojo
+
+jntt:
+  jwt:
+    secret: JNTTLOGINSECRET # 登录校验的密钥
+#    pubKeyPath: /Users/rd-yyx/IdeaProjects/jntt/id_rsa.pub # 公钥地址
+#    priKeyPath: /Users/rd-yyx/IdeaProjects/jntt/id_rsa.pri # 私钥地址
+    pubKeyPath: C:/keygen/id_rsa.pub # 公钥地址
+    priKeyPath: C:/keygen/id_rsa.pri # 私钥地址
+    expire: 30 # 过期时间,单位分钟
+    cookieName: JNTT_TOKEN
+    cookieMaxAge: 1800

@@ -1,0 +1,42 @@
+server:
+  port: 10010
+spring:
+  application:
+    name: com.jntt.auth.api-gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+    registry-fetch-interval-seconds: 5
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+zuul:
+  routes:
+    user-service: /user/**
+    auth-service: /auth/**
+    public-service: /public/**
+  add-host-header: true
+  sensitive-headers:
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 80000
+ribbon:
+  connetTimeout: 6000
+  readTimeout: 80000
+jn:
+  jwt:
+#    pubKeyPath: /Users/rd-yyx/IdeaProjects/jntt/id_rsa.pub # 公钥地址
+    pubKeyPath: C:/keygen/id_rsa.pub # 公钥地址
+    cookieName: JNTT_TOKEN # cookie的名称
+  filter:
+    allowPaths:
+    - /user/register
+    - /auth/checklog
+    - /auth/log
+    - /public/ob
+    - /public
